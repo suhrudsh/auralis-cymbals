@@ -59,6 +59,10 @@ export function HeroSectionScene(props) {
     normalMap: "auralis-cymbals-hero-section-plane-normal.webp",
   });
 
+  const cymbalTextures = useTexture({
+    map: "cymbal-diffuse.webp",
+  });
+
   // Shader uniforms for other meshes
   const shaderUniforms = useMemo(
     () => ({
@@ -103,7 +107,7 @@ export function HeroSectionScene(props) {
             color={materials.cymbals.color}
             roughness={materials.cymbals.roughness}
             metalness={materials.cymbals.metalness}
-            map={materials.cymbals.map}
+            map={cymbalTextures.map}
             normalMap={materials.cymbals.normalMap}
             roughnessMap={materials.cymbals.roughnessMap}
             normalScale={materials.cymbals.normalScale}
