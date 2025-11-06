@@ -6,7 +6,7 @@ import vertexShader from "./shaders/vertexShader.glsl";
 import fragmentShader from "./shaders/fragmentShader.glsl";
 import planeVertexShader from "./shaders/planeVertexShader.glsl";
 import planeFragmentShader from "./shaders/planeFragmentShader.glsl";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { MeshStandardMaterial } from "three";
 
 export function HeroSectionScene(props) {
@@ -49,9 +49,14 @@ export function HeroSectionScene(props) {
     () => ({
       uTrailTexture: { value: trailTexture },
       uShadowTexture: { value: shadowMap },
+      uTime: { value: 0 },
     }),
     [trailTexture, shadowMap],
   );
+
+  useFrame(({ clock }) => {
+    planeUniforms.uTime.value = clock.elapsedTime;
+  });
 
   const planeTextures = useTexture({
     map: "auralis-cymbals-hero-section-plane-basecolor.webp",

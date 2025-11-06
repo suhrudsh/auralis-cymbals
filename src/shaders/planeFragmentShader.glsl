@@ -30,7 +30,7 @@ void main() {
   // Desired: Shadowed AND Slightly Darkened Base Color
 
   // Define the extra darkening factor (e.g., 0.8 for 20% darker)
-  float extraDarkeningFactor = 0.9;
+  float extraDarkeningFactor = 5.0;
 
   // Step 1: Apply the baked shadow
   vec4 shadowedColor = baseColor * rawShadowTex;

@@ -44,6 +44,7 @@ export function useTrailTexture({ size, fade = 0.01 }) {
           uMouse: { value: new Vector2(0.5, 0.5) },
           uFade: { value: fade },
           uAspect: { value: aspectRatio },
+          uTime: { value: 0 },
         },
         vertexShader: trailVertexShader,
         fragmentShader: trailFragmentShader,
@@ -59,9 +60,10 @@ export function useTrailTexture({ size, fade = 0.01 }) {
 
   const pointerRef = useRef(new Vector2(0.5, 0.5));
 
-  useFrame(() => {
+  useFrame(({ clock }) => {
     trailMaterial.uniforms.uMouse.value.copy(pointerRef.current);
     trailMaterial.uniforms.uPreviousFrame.value = renderTargets.read.texture;
+    trailMaterial.uniforms.uTime.value = clock.elapsedTime; // Approximate time increment
 
     gl.setRenderTarget(renderTargets.write);
     gl.render(scene, camera);
