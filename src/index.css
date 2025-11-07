@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 @theme {
   --color-bg: #28120f;
   --color-accent: #3f2521;
   --color-text: #f8e8ce;
+  --font-heading: "Cinzel", serif;
+  --font-body: "Montserrat", sans-serif;
 }
