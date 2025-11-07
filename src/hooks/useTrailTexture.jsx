@@ -13,8 +13,8 @@ import {
 import { useFrame, useThree } from "@react-three/fiber";
 
 // You'll need to create these two new shader files
-import trailFragmentShader from "./shaders/trailFragmentShader.glsl";
-import trailVertexShader from "./shaders/trailVertexShader.glsl";
+import trailFragmentShader from "../shaders/trailFragmentShader.glsl";
+import trailVertexShader from "../shaders/trailVertexShader.glsl";
 
 export function useTrailTexture({ size, fade = 0.01 }) {
   const { gl } = useThree();

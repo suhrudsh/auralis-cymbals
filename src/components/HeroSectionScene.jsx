@@ -1,11 +1,11 @@
-import { Helper, useGLTF, useTexture } from "@react-three/drei";
+import { useGLTF, useTexture } from "@react-three/drei";
 import { useMemo, useEffect } from "react";
 import CustomShaderMaterial from "three-custom-shader-material";
-import { useTrailTexture } from "./useTrailTexture";
-import vertexShader from "./shaders/vertexShader.glsl";
-import fragmentShader from "./shaders/fragmentShader.glsl";
-import planeVertexShader from "./shaders/planeVertexShader.glsl";
-import planeFragmentShader from "./shaders/planeFragmentShader.glsl";
+import { useTrailTexture } from "../hooks/useTrailTexture";
+import vertexShader from "../shaders/vertexShader.glsl";
+import fragmentShader from "../shaders/fragmentShader.glsl";
+import planeVertexShader from "../shaders/planeVertexShader.glsl";
+import planeFragmentShader from "../shaders/planeFragmentShader.glsl";
 import { useFrame, useThree } from "@react-three/fiber";
 import { MeshStandardMaterial } from "three";
 
@@ -82,44 +82,46 @@ export function HeroSectionScene(props) {
   );
 
   return (
-    <group {...props} dispose={null}>
-      {/* Plane with shadow bake and trail mask */}
-      <mesh geometry={nodes.Plane.geometry}>
-        <CustomShaderMaterial
-          baseMaterial={MeshStandardMaterial}
-          vertexShader={planeVertexShader}
-          fragmentShader={planeFragmentShader}
-          {...planeTextures}
-          metalness={1}
-          uniforms={planeUniforms}
-        />
-      </mesh>
-
-      {/* Other meshes with custom shader */}
-      {cymbals.map((cymbal, i) => (
-        <mesh
-          key={i}
-          geometry={cymbal.geometry}
-          position={cymbal.position}
-          rotation={cymbal.rotation}
-        >
+    <>
+      <group {...props} dispose={null}>
+        {/* Plane with shadow bake and trail mask */}
+        <mesh geometry={nodes.Plane.geometry}>
           <CustomShaderMaterial
             baseMaterial={MeshStandardMaterial}
-            uniforms={shaderUniforms}
-            vertexShader={vertexShader}
-            fragmentShader={fragmentShader}
-            transparent={true}
-            color={materials.cymbals.color}
-            roughness={materials.cymbals.roughness}
-            metalness={materials.cymbals.metalness}
-            map={cymbalTextures.map}
-            normalMap={materials.cymbals.normalMap}
-            roughnessMap={materials.cymbals.roughnessMap}
-            normalScale={materials.cymbals.normalScale}
+            uniforms={planeUniforms}
+            vertexShader={planeVertexShader}
+            fragmentShader={planeFragmentShader}
+            {...planeTextures}
+            metalness={1}
           />
         </mesh>
-      ))}
-    </group>
+
+        {/* Other meshes with custom shader */}
+        {cymbals.map((cymbal, i) => (
+          <mesh
+            key={i}
+            geometry={cymbal.geometry}
+            position={cymbal.position}
+            rotation={cymbal.rotation}
+          >
+            <CustomShaderMaterial
+              baseMaterial={MeshStandardMaterial}
+              uniforms={shaderUniforms}
+              vertexShader={vertexShader}
+              fragmentShader={fragmentShader}
+              transparent={true}
+              color={materials.cymbals.color}
+              roughness={materials.cymbals.roughness}
+              metalness={materials.cymbals.metalness}
+              map={cymbalTextures.map}
+              normalMap={materials.cymbals.normalMap}
+              roughnessMap={materials.cymbals.roughnessMap}
+              normalScale={materials.cymbals.normalScale}
+            />
+          </mesh>
+        ))}
+      </group>
+    </>
   );
 }
 
