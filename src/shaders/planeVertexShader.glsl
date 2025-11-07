@@ -17,7 +17,7 @@ void main() {
   vUv = uv1;
   vShadowUv = vec2(uv1.x, 1.0 - uv1.y);
 
-  vec3 wave = gerstnerWave(uv1, vec2(1.0, 1.0), 15.0, 0.15, uTime / 10.0);
+  vec3 wave = gerstnerWave(uv1, vec2(1.0, 1.0), 8.0, 0.15, uTime / 10.0);
 
   float noise = cnoise(vec3(uv1 * 4.0, uTime / 10.0));
   float noiseStrength = 0.9; // tweak for subtle or heavy distortion
