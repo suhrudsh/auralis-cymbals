@@ -2,8 +2,11 @@ uniform sampler2D uTrailTexture;
 uniform float uExtrusionAmount;
 
 varying float vMask;
+varying vec2 vUv;
 
 void main() {
+  vUv = uv;
+
   vec4 clipPos = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   vec2 screenUV = clipPos.xy / clipPos.w * 0.5 + 0.5;
 
