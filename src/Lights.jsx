@@ -1,49 +1,86 @@
-import { useHelper } from "@react-three/drei";
-import { useRef } from "react";
-import { DirectionalLightHelper } from "three";
-
-//TODO: Adjust light intensities and positions to match Blender scene as closely as possible
+// import { useHelper } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import { useRef, useEffect } from "react";
+import { Vector3 } from "three";
+import {
+  // RectAreaLightHelper,
+  RectAreaLightUniformsLib,
+} from "three/examples/jsm/Addons.js";
 
 export function Lights() {
-  const dirLight1 = useRef();
-  const dirLight2 = useRef();
-  const dirLight3 = useRef();
-  const dirLight4 = useRef();
+  const areaLight1 = useRef();
+  const areaLight2 = useRef();
+  const areaLight3 = useRef();
+  const dirLight = useRef();
 
-  useHelper(dirLight1, DirectionalLightHelper, 5, "red");
-  useHelper(dirLight2, DirectionalLightHelper, 5, "green");
-  useHelper(dirLight3, DirectionalLightHelper, 5, "blue");
-  useHelper(dirLight4, DirectionalLightHelper, 5, "yellow");
+  const { scene } = useThree();
+
+  useEffect(() => {
+    RectAreaLightUniformsLib.init();
+  }, [scene]);
+
+  // useHelper(areaLight1, RectAreaLightHelper, "red");
+  // useHelper(areaLight2, RectAreaLightHelper, "green");
+  // useHelper(areaLight3, RectAreaLightHelper, "blue");
+  // useHelper(dirLight, DirectionalLightHelper, "yellow");
+
+  useEffect(() => {
+    if (areaLight1.current) {
+      areaLight1.current.lookAt(-19.007, 0, -20.258);
+    }
+
+    if (areaLight2.current) {
+      areaLight2.current.lookAt(16.801, 0, -29.71);
+    }
+
+    if (areaLight3.current) {
+      areaLight3.current.lookAt(-29.786, 0, 15.529);
+    }
+
+    if (dirLight.current) {
+      const targetPos = new Vector3(40, 38.49, 30).add(
+        new Vector3(-0.631, -0.612, -0.477).multiplyScalar(10),
+      );
+      dirLight.current.target.position.copy(targetPos);
+      dirLight.current.target.updateMatrixWorld();
+    }
+  });
 
   return (
     <>
-      {/* Area Light 1 as Directional - Blender: (-20, 20, 53.22) */}
-      <directionalLight
-        ref={dirLight1}
-        position={[-20, 53.22, -20]}
-        intensity={10}
+      {/* Area Light 1 */}
+      <rectAreaLight
+        ref={areaLight1}
+        position={[-45, 53, -25]}
+        intensity={5}
         color="#ffffff"
+        width={35}
+        height={35}
       />
 
-      {/* Area Light 2 as Directional - Blender: (17, 30, 43.58) */}
-      <directionalLight
-        ref={dirLight2}
-        position={[17, 43.58, -30]}
-        intensity={10}
+      {/* Area Light 2 */}
+      <rectAreaLight
+        ref={areaLight2}
+        position={[40, 53, -30]}
+        intensity={5}
         color="#ffffff"
+        width={35}
+        height={35}
       />
 
-      {/* Area Light 3 as Directional - Blender: (-30.56, -15.84, 53.22) */}
-      <directionalLight
-        ref={dirLight3}
-        position={[-30.56, 53.22, 15.84]}
-        intensity={10}
+      {/* Area Light 3 */}
+      <rectAreaLight
+        ref={areaLight3}
+        position={[-45, 53, 25]}
+        intensity={5}
         color="#ffffff"
+        width={35}
+        height={35}
       />
 
-      {/* Sun Light - Blender: (40, -30, 38.49) */}
+      {/* Sun Light */}
       <directionalLight
-        ref={dirLight4}
+        ref={dirLight}
         position={[40, 38.49, 30]}
         intensity={1.75}
         color="#ffffff"
