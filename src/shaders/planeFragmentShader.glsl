@@ -30,15 +30,15 @@ void main() {
   // Desired: Shadowed AND Slightly Darkened Base Color
 
   // Define the extra darkening factor (e.g., 0.8 for 20% darker)
-  float extraDarkeningFactor = 5.0;
+  float extraLighteningFactor = 5.0;
 
   // Step 1: Apply the baked shadow
   vec4 shadowedColor = baseColor * rawShadowTex;
 
   // Step 2: Apply the slight extra darkening
-  vec4 darkenedShadowedColor = shadowedColor * extraDarkeningFactor;
+  vec4 lightenedShadowedColor = shadowedColor * extraLighteningFactor;
 
-  vec4 colorB = darkenedShadowedColor;
+  vec4 colorB = lightenedShadowedColor;
 
   // 3. Blend the Colors using the Mask
   // mix(colorA, colorB, mask):
