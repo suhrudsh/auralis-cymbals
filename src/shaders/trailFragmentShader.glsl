@@ -35,7 +35,7 @@ void main() {
   dist += n * noiseStrength;
 
   // 6. Soft circular mask
-  float radius = 0.2;
+  float radius = 0.3;
   float newDot = 1.0 - smoothstep(0.0, radius, dist);
 
   // 7. Combine and output
