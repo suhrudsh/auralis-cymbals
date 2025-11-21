@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export default function LenisWrapper({ children }) {
-  const lenisRef = useRef();
+  const lenisRef = useRef(null);
 
   useEffect(() => {
     const update = (time) => {

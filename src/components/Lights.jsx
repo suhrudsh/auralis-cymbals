@@ -8,10 +8,10 @@ import {
 } from "three/examples/jsm/Addons.js";
 
 export function Lights() {
-  const areaLight1 = useRef();
-  const areaLight2 = useRef();
-  const areaLight3 = useRef();
-  const dirLight = useRef();
+  const areaLight1 = useRef(null);
+  const areaLight2 = useRef(null);
+  const areaLight3 = useRef(null);
+  const dirLight = useRef(null);
 
   const { scene } = useThree();
 
