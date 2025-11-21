@@ -68,6 +68,10 @@ export function CollectionSection() {
         staticImageRef.current.style.display = "block";
         lumisVideoRef.current.style.opacity = 0;
       },
+      onLeaveBack: () => {
+        staticImageRef.current.style.display = "none";
+        lumisVideoRef.current.style.opacity = 1;
+      },
       onUpdate: (self) => {
         const p = self.progress;
         const lumisVideoPosition = getPos(lumisVideoRef.current);

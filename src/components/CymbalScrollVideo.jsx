@@ -81,11 +81,9 @@ export function CymbalScrollVideo({ staticImageRef }) {
       },
       onLeave: () => {
         canvas.style.opacity = 0;
-        staticImageRef.current.style.display = "block";
       },
       onEnterBack: () => {
         canvas.style.opacity = 1;
-        staticImageRef.current.style.display = "none";
       },
     });
 
