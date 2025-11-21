@@ -111,8 +111,8 @@ export function CollectionSection() {
         />
         <CymbalScrollVideo staticImageRef={staticImageRef} />
       </div>
-      <div>
         <div
+        id="the-collection"
           ref={animationContainerRef}
           className="grid grid-cols-3 gap-6 px-12"
         >
@@ -141,7 +141,6 @@ export function CollectionSection() {
             <br />
             wash and quick response.
           </CymbalShowcaseCard>
-        </div>
       </div>
     </section>
   );

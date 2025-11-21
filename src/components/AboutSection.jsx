@@ -60,6 +60,7 @@ export function AboutSection() {
 
   return (
     <section
+      id="about-us"
       ref={sectionRef}
       className="relative grid h-[95svh] grid-cols-12 gap-6 px-12 py-24"
     >

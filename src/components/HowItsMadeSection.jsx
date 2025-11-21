@@ -94,7 +94,7 @@ export function HowItsMadeSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="px-12 py-24">
+    <section id="how-its-made" ref={sectionRef} className="px-12 py-24">
       <h2
         ref={headingRef}
         className="font-heading col-span-full mb-16 text-center text-8xl font-bold"

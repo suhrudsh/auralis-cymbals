@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import { HeroSection } from "./components/HeroSection";
 import LenisWrapper from "./components/LenisWrapper";
 import { CTASection } from "./components/CTASection";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <HowItsMadeSection />
       <CollectionSection />
       <CTASection />
+      <Footer />
     </>
   );
 }
