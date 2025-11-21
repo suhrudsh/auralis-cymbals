@@ -1,3 +1,4 @@
+import { CollectionSection } from "./components/CollectionSection";
 import { HowItsMadeSection } from "./components/HowItsMadeSection";
 import { AboutSection } from "./components/AboutSection";
 import { Header } from "./components/Header";
@@ -12,6 +13,7 @@ function App() {
       <HeroSection />
       <AboutSection />
       <HowItsMadeSection />
+      <CollectionSection />
     </>
   );
 }
