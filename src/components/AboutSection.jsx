@@ -66,7 +66,7 @@ export function AboutSection() {
     >
       <div
         ref={imageRef}
-        className="absolute h-full w-full bg-[url('images/cymbal-finger.webp')] bg-right bg-no-repeat mix-blend-lighten"
+        className="absolute h-full w-full bg-[url('/images/cymbal-finger.webp')] bg-right bg-no-repeat mix-blend-lighten"
       />
 
       <h2
