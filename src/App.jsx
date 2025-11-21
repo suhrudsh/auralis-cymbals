@@ -4,6 +4,7 @@ import { AboutSection } from "./components/AboutSection";
 import { Header } from "./components/Header";
 import { HeroSection } from "./components/HeroSection";
 import LenisWrapper from "./components/LenisWrapper";
+import { CTASection } from "./components/CTASection";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <AboutSection />
       <HowItsMadeSection />
       <CollectionSection />
+      <CTASection />
     </>
   );
 }
