@@ -74,15 +74,19 @@ export function CollectionSection() {
       },
       onUpdate: (self) => {
         const p = self.progress;
+        const ease = gsap.parseEase("power2.out");
+
+        const easedProgress = ease(p);
+
         const lumisVideoPosition = getPos(lumisVideoRef.current);
         const targetScale =
           lumisVideoRef.current.offsetWidth / window.innerWidth;
 
-        const scale = 1 - (1 - targetScale) * p;
+        const scale = 1 - (1 - targetScale) * easedProgress;
 
         gsap.set(staticImageRef.current, {
-          x: lumisVideoPosition.x * p,
-          y: lumisVideoPosition.y * p,
+          x: lumisVideoPosition.x * easedProgress,
+          y: lumisVideoPosition.y * easedProgress,
           scale: scale,
         });
       },
@@ -115,36 +119,36 @@ export function CollectionSection() {
         />
         <CymbalScrollVideo staticImageRef={staticImageRef} />
       </div>
-        <div
+      <div
         id="the-collection"
-          ref={animationContainerRef}
-          className="grid grid-cols-3 gap-6 px-12"
+        ref={animationContainerRef}
+        className="grid grid-cols-3 gap-6 px-12"
+      >
+        <CymbalShowcaseCard
+          heading={"Vetra"}
+          videoSrc={"vetra-cymbal-hover.webm"}
         >
-          <CymbalShowcaseCard
-            heading={"Vetra"}
-            videoSrc={"vetra-cymbal-hover.webm"}
-          >
-            Dark, complex, and warm
-            <br />
-            under a light touch.
-          </CymbalShowcaseCard>
-          <CymbalShowcaseCard
-            heading={"Lumis"}
-            videoSrc={"lumis-cymbal-hover.webm"}
-            videoRef={lumisVideoRef}
-          >
-            Bright and open, with a fast,
-            <br />
-            shimmering decay.
-          </CymbalShowcaseCard>
-          <CymbalShowcaseCard
-            heading={"Solan"}
-            videoSrc={"solan-cymbal-hover.webm"}
-          >
-            Dry and defined, with a subtle
-            <br />
-            wash and quick response.
-          </CymbalShowcaseCard>
+          Dark, complex, and warm
+          <br />
+          under a light touch.
+        </CymbalShowcaseCard>
+        <CymbalShowcaseCard
+          heading={"Lumis"}
+          videoSrc={"lumis-cymbal-hover.webm"}
+          videoRef={lumisVideoRef}
+        >
+          Bright and open, with a fast,
+          <br />
+          shimmering decay.
+        </CymbalShowcaseCard>
+        <CymbalShowcaseCard
+          heading={"Solan"}
+          videoSrc={"solan-cymbal-hover.webm"}
+        >
+          Dry and defined, with a subtle
+          <br />
+          wash and quick response.
+        </CymbalShowcaseCard>
       </div>
     </section>
   );
