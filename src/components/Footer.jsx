@@ -10,7 +10,7 @@ export function Footer() {
         alt="Auralis Logo"
         className="w-48"
       />
-      <div className="flex flex-col">
+      <nav className="flex flex-col">
         <a
           className="underline-offset-2 hover:underline"
           href="#about-us"
@@ -32,7 +32,7 @@ export function Footer() {
         >
           The Collection
         </a>
-      </div>
+      </nav>
       <div className="flex flex-col gap-4">
         <p>
           Auralis Cymbals is a concept.
