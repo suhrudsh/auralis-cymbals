@@ -23,18 +23,14 @@ export function HeroSectionScene(props) {
   } = useTrailTexture({ size });
 
   useEffect(() => {
-    const handlePointer = (e) => {
-      updatePointer(e);
-    };
-
-    window.addEventListener("mousemove", handlePointer);
+    window.addEventListener("mousemove", updatePointer);
     window.addEventListener("mouseleave", clearPointer);
-    window.addEventListener("touchmove", handlePointer, { passive: true });
+    window.addEventListener("touchmove", updatePointer, { passive: true });
     window.addEventListener("touchend", clearPointer, { passive: true });
     return () => {
-      window.removeEventListener("mousemove", handlePointer);
+      window.removeEventListener("mousemove", updatePointer);
       window.removeEventListener("mouseleave", clearPointer);
-      window.removeEventListener("touchmove", handlePointer);
+      window.removeEventListener("touchmove", updatePointer);
       window.removeEventListener("touchend", clearPointer);
     };
   }, [size, updatePointer, clearPointer]);
