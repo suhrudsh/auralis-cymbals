@@ -59,11 +59,17 @@ export function HeroSection() {
         </Canvas>
       </div>
       <div className="to-bg flex h-full w-full flex-col items-center justify-center gap-8 bg-linear-to-b from-transparent from-60% text-center">
-        <h1 ref={headingRef} className="font-heading text-6xl font-black">
+        <h1
+          ref={headingRef}
+          className="font-heading font-black lg:text-5xl xl:text-6xl"
+        >
           Cymbals shaped by hand,
           <br /> built for sound.
         </h1>
-        <p ref={subheadingRef} className="text-3xl leading-11 font-bold">
+        <p
+          ref={subheadingRef}
+          className="font-bold lg:text-2xl lg:leading-9 xl:text-3xl xl:leading-11"
+        >
           Auralis is a collection of hand-crafted cymbals made to <br /> sound
           as unique as the drummers who play them.
         </p>

@@ -4,11 +4,11 @@ export function Footer() {
   const lenis = useLenis();
 
   return (
-    <footer className="bg-text text-bg flex items-center justify-between px-12 py-24 text-xl">
+    <footer className="bg-text text-bg flex items-center justify-between px-12 py-24 lg:text-lg xl:text-xl">
       <img
         src="images/auralis-logo-dark.webp"
         alt="Auralis Logo"
-        className="w-48"
+        className="lg:w-40 xl:w-48"
       />
       <nav className="flex flex-col">
         <a

@@ -66,12 +66,12 @@ export function AboutSection() {
     >
       <div
         ref={imageRef}
-        className="absolute h-full w-full bg-[url('/images/cymbal-finger.webp')] bg-right bg-no-repeat mix-blend-lighten"
+        className="absolute right-0 h-full w-full bg-[url('/images/cymbal-finger.webp')] bg-contain bg-right bg-no-repeat mix-blend-lighten"
       />
 
       <h2
         ref={headingRef}
-        className="font-heading col-span-7 text-8xl font-bold"
+        className="font-heading col-span-7 font-bold lg:text-7xl xl:text-8xl"
       >
         Built for
         <br />
@@ -80,7 +80,7 @@ export function AboutSection() {
         listen closely.
       </h2>
 
-      <p className="col-span-full col-start-7 self-end text-2xl">
+      <p className="col-span-full col-start-7 self-end text-balance lg:text-xl xl:text-2xl">
         Every Auralis cymbal is shaped to bring out a distinct voice — complex,
         musical, and responsive. We believe great sound comes from intention.
         From the alloy, the hammering, and the hands that shape it. Auralis

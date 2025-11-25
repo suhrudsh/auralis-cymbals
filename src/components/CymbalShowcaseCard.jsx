@@ -12,7 +12,9 @@ export function CymbalShowcaseCard({ heading, children, videoSrc, videoRef }) {
       }}
       className="bg-accent group py-27 text-center"
     >
-      <h3 className="font-heading text-8xl font-bold">{heading}</h3>
+      <h3 className="font-heading font-bold lg:text-7xl xl:text-8xl">
+        {heading}
+      </h3>
       <video
         ref={(node) => {
           internalVideoRef.current = node; // keeps hover working
@@ -25,7 +27,7 @@ export function CymbalShowcaseCard({ heading, children, videoSrc, videoRef }) {
         preload="metadata"
         //   poster="/thumbnail.jpg"
       />
-      <p className="text-2xl">{children}</p>
+      <p className="lg:text-xl xl:text-2xl">{children}</p>
     </div>
   );
 }

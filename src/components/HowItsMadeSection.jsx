@@ -97,12 +97,12 @@ export function HowItsMadeSection() {
     <section id="how-its-made" ref={sectionRef} className="px-12 py-24">
       <h2
         ref={headingRef}
-        className="font-heading col-span-full mb-16 text-center text-8xl font-bold"
+        className="font-heading col-span-full mb-16 text-center font-bold lg:text-7xl xl:text-8xl"
       >
         Made by hand. <br /> Made to last.
       </h2>
 
-      <div className="col-span-full grid grid-cols-24 gap-6 text-4xl">
+      <div className="col-span-full grid grid-cols-24 gap-6 text-balance lg:text-2xl xl:text-4xl">
         <img
           ref={(el) => el && imgRefs.current.push(el)}
           src="images/bronze-sheet.webp"
@@ -111,12 +111,9 @@ export function HowItsMadeSection() {
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
-          className="col-span-10 col-start-12 row-start-2"
+          className="col-span-11 col-start-12 row-start-2"
         >
-          Each cymbal starts as a B20 bronze
-          <br />
-          blank — a mix of copper and tin
-          <br />
+          Each cymbal starts as a B20 bronze blank — a mix of copper and tin
           known for its musical range.
         </p>
 
@@ -128,12 +125,9 @@ export function HowItsMadeSection() {
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
-          className="col-span-10 col-start-8 row-start-6 translate-y-12"
+          className="col-span-11 col-start-8 row-start-6 translate-y-12"
         >
-          From there, it’s heated, hammered,
-          <br />
-          and lathed by hand until the
-          <br />
+          From there, it’s heated, hammered, and lathed by hand until the
           surface begins to sing.
         </p>
 
@@ -145,7 +139,7 @@ export function HowItsMadeSection() {
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
-          className="col-span-10 col-start-12 row-start-10"
+          className="col-span-11 col-start-12 row-start-10"
         >
           No two cymbals are identical. Subtle variations in hammer marks and
           thickness give each one its own tone and feel.

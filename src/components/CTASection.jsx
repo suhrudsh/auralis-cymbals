@@ -2,12 +2,12 @@ export function CTASection() {
   return (
     <section className="bg-accent flex flex-col items-center justify-center gap-8 p-24">
       <div className="flex flex-col gap-4">
-        <h2 className="font-heading text-center text-8xl font-bold">
+        <h2 className="font-heading text-center font-bold lg:text-7xl xl:text-8xl">
           Auralis is about
           <br />
           sound with soul
         </h2>
-        <p className="text-center text-4xl leading-13">
+        <p className="text-center lg:text-2xl lg:leading-9 xl:text-4xl xl:leading-13">
           Made by hand, shaped by time, built
           <br />
           for players who care about feel.

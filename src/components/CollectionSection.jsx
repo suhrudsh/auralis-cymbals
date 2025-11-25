@@ -99,13 +99,13 @@ export function CollectionSection() {
         <div className="sticky top-24 flex flex-col gap-8">
           <h2
             ref={headingRef}
-            className="font-heading text-center text-8xl font-bold"
+            className="font-heading text-center font-bold lg:text-7xl xl:text-8xl"
           >
             The Auralis
             <br />
             Collection
           </h2>
-          <p className="text-center text-2xl leading-9">
+          <p className="text-center lg:text-xl lg:leading-7.5 xl:text-2xl xl:leading-9">
             A series of hand-crafted cymbals each tuned
             <br />
             for a different kind of player
