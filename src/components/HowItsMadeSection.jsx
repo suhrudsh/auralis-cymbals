@@ -94,24 +94,24 @@ export function HowItsMadeSection() {
   }, []);
 
   return (
-    <section id="how-its-made" ref={sectionRef} className="px-12 py-24">
+    <section id="how-its-made" ref={sectionRef} className="px-4 py-24 md:px-12">
       <h2
         ref={headingRef}
-        className="font-heading col-span-full mb-16 text-center font-bold lg:text-7xl xl:text-8xl"
+        className="font-heading mb-16 text-center text-4xl font-bold md:text-5xl lg:text-7xl xl:text-8xl"
       >
         Made by hand. <br /> Made to last.
       </h2>
 
-      <div className="col-span-full grid grid-cols-24 gap-6 text-balance lg:text-2xl xl:text-4xl">
+      <div className="grid grid-cols-8 gap-6 text-xs text-balance md:text-xl lg:grid-cols-24 lg:text-2xl xl:text-4xl">
         <img
           ref={(el) => el && imgRefs.current.push(el)}
           src="images/bronze-sheet.webp"
           alt=""
-          className="col-span-10 col-start-3 row-span-5 row-start-1"
+          className="col-span-5 col-start-1 row-span-5 row-start-1 lg:col-span-10 lg:col-start-3"
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
-          className="col-span-11 col-start-12 row-start-2"
+          className="col-span-4 col-start-5 row-start-2 lg:col-span-11 lg:col-start-12"
         >
           Each cymbal starts as a B20 bronze blank — a mix of copper and tin
           known for its musical range.
@@ -121,11 +121,11 @@ export function HowItsMadeSection() {
           ref={(el) => el && imgRefs.current.push(el)}
           src="images/bronze-sheet-hammer.webp"
           alt=""
-          className="col-span-10 col-start-13 row-span-5 row-start-4"
+          className="col-span-5 col-start-4 row-span-5 row-start-6 lg:col-span-10 lg:col-start-13"
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
-          className="col-span-11 col-start-8 row-start-6 translate-y-12"
+          className="col-span-4 col-start-2 row-start-7 lg:col-span-11 lg:col-start-6 lg:row-start-8 lg:translate-y-12"
         >
           From there, it’s heated, hammered, and lathed by hand until the
           surface begins to sing.
@@ -135,11 +135,11 @@ export function HowItsMadeSection() {
           ref={(el) => el && imgRefs.current.push(el)}
           src="images/cymbals-on-stands.webp"
           alt=""
-          className="col-span-10 col-start-3 row-span-5 row-start-8"
+          className="col-span-5 col-start-1 row-span-5 row-start-11 lg:col-span-10 lg:col-start-3"
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
-          className="col-span-11 col-start-12 row-start-10"
+          className="col-span-4 col-start-5 row-start-13 lg:col-span-11 lg:col-start-12"
         >
           No two cymbals are identical. Subtle variations in hammer marks and
           thickness give each one its own tone and feel.

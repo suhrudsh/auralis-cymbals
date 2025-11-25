@@ -5,10 +5,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export function CollectionSection() {
+  const isMobile = useIsMobile(1024);
+
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const staticImageRef = useRef(null);
@@ -53,7 +56,7 @@ export function CollectionSection() {
     ScrollTrigger.create({
       trigger: animationContainerRef.current,
       start: "top bottom",
-      end: "bottom bottom",
+      end: isMobile ? "top 20%" : "bottom bottom",
       scrub: true,
       invalidateOnRefresh: true,
       onEnter: () => {
@@ -80,7 +83,7 @@ export function CollectionSection() {
 
         const lumisVideoPosition = getPos(lumisVideoRef.current);
         const targetScale =
-          lumisVideoRef.current.offsetWidth / window.innerWidth;
+          (lumisVideoRef.current.offsetWidth / 1920) * (isMobile ? 1.15 : 1.25);
 
         const scale = 1 - (1 - targetScale) * easedProgress;
 
@@ -91,21 +94,21 @@ export function CollectionSection() {
         });
       },
     });
-  });
+  }, [isMobile]);
 
   return (
     <section ref={sectionRef} className="flex flex-col gap-16 py-24">
       <div>
-        <div className="sticky top-24 flex flex-col gap-8">
+        <div className="sticky top-24 flex flex-col gap-2 lg:gap-8">
           <h2
             ref={headingRef}
-            className="font-heading text-center font-bold lg:text-7xl xl:text-8xl"
+            className="font-heading text-center text-4xl font-bold md:text-5xl lg:text-7xl xl:text-8xl"
           >
             The Auralis
             <br />
             Collection
           </h2>
-          <p className="text-center lg:text-xl lg:leading-7.5 xl:text-2xl xl:leading-9">
+          <p className="text-center text-xs leading-4.5 md:text-lg md:leading-6.75 lg:text-xl lg:leading-7.5 xl:text-2xl xl:leading-9">
             A series of hand-crafted cymbals each tuned
             <br />
             for a different kind of player
@@ -122,8 +125,20 @@ export function CollectionSection() {
       <div
         id="the-collection"
         ref={animationContainerRef}
-        className="grid grid-cols-3 gap-6 px-12"
+        className="grid gap-6 px-12 lg:grid-cols-3"
       >
+        {isMobile && (
+          <CymbalShowcaseCard
+            heading={"Lumis"}
+            videoSrc={"lumis-cymbal-hover.webm"}
+            videoRef={lumisVideoRef}
+          >
+            Bright and open, with a fast,
+            <br />
+            shimmering decay.
+          </CymbalShowcaseCard>
+        )}
+
         <CymbalShowcaseCard
           heading={"Vetra"}
           videoSrc={"vetra-cymbal-hover.webm"}
@@ -132,15 +147,17 @@ export function CollectionSection() {
           <br />
           under a light touch.
         </CymbalShowcaseCard>
-        <CymbalShowcaseCard
-          heading={"Lumis"}
-          videoSrc={"lumis-cymbal-hover.webm"}
-          videoRef={lumisVideoRef}
-        >
-          Bright and open, with a fast,
-          <br />
-          shimmering decay.
-        </CymbalShowcaseCard>
+        {!isMobile && (
+          <CymbalShowcaseCard
+            heading={"Lumis"}
+            videoSrc={"lumis-cymbal-hover.webm"}
+            videoRef={lumisVideoRef}
+          >
+            Bright and open, with a fast,
+            <br />
+            shimmering decay.
+          </CymbalShowcaseCard>
+        )}
         <CymbalShowcaseCard
           heading={"Solan"}
           videoSrc={"solan-cymbal-hover.webm"}
