@@ -70,6 +70,7 @@ export function CymbalScrollVideo({ staticImageRef }) {
       start: "top top",
       end: `+=${scrollLength}`,
       scrub: 1,
+      invalidateOnRefresh: true,
       onUpdate: (self) => {
         const frameIndex = Math.floor(self.progress * (totalFrames - 1));
         const img = imagesRef.current[frameIndex];
@@ -81,9 +82,11 @@ export function CymbalScrollVideo({ staticImageRef }) {
       },
       onLeave: () => {
         canvas.style.opacity = 0;
+        staticImageRef.current.style.display = "block";
       },
       onEnterBack: () => {
         canvas.style.opacity = 1;
+        staticImageRef.current.style.display = "none";
       },
     });
 

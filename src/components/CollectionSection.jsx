@@ -60,7 +60,6 @@ export function CollectionSection() {
       scrub: true,
       invalidateOnRefresh: true,
       onEnter: () => {
-        staticImageRef.current.style.display = "block";
         lumisVideoRef.current.style.opacity = 0;
       },
       onLeave: () => {
@@ -72,7 +71,6 @@ export function CollectionSection() {
         lumisVideoRef.current.style.opacity = 0;
       },
       onLeaveBack: () => {
-        staticImageRef.current.style.display = "none";
         lumisVideoRef.current.style.opacity = 1;
       },
       onUpdate: (self) => {
