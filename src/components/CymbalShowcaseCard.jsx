@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export function CymbalShowcaseCard({
   heading,
@@ -8,6 +8,12 @@ export function CymbalShowcaseCard({
   useHEVC,
 }) {
   const internalVideoRef = useRef(null);
+
+  useEffect(() => {
+    if (internalVideoRef.current && useHEVC !== null) {
+      internalVideoRef.current.load();
+    }
+  }, [useHEVC]);
 
   return (
     <div
