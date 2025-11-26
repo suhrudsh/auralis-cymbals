@@ -37,7 +37,7 @@ export function CymbalScrollVideo({ staticImageRef }) {
   useEffect(() => {
     for (let i = 1; i <= totalFrames; i++) {
       const img = new Image();
-      img.src = `cymbal-scroll-video/cymbal-scroll-video${i.toString().padStart(4, "0")}.webp`;
+      img.src = `cymbal-scroll-video/cymbal-scroll-video-${i.toString().padStart(4, "0")}.webp`;
       imagesRef.current.push(img);
     }
     // once the first frame is loaded, draw it
