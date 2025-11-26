@@ -125,7 +125,7 @@ export function HowItsMadeSection() {
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
-          className="col-span-4 col-start-2 row-start-7 lg:col-span-11 lg:col-start-6 lg:row-start-8 lg:translate-y-12"
+          className="col-span-4 col-start-2 row-start-7 lg:col-span-11 lg:col-start-6 lg:row-start-8 lg:translate-y-12 2xl:col-span-8 2xl:col-start-7"
         >
           From there, it’s heated, hammered, and lathed by hand until the
           surface begins to sing.
