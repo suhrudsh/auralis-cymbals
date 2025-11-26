@@ -80,7 +80,7 @@ export function AboutSection() {
         listen closely.
       </h2>
 
-      <p className="col-span-full col-start-7 self-end text-center text-xs md:text-lg lg:text-xl xl:text-2xl">
+      <p className="col-span-full col-start-7 self-end text-center text-xs md:text-lg lg:text-left lg:text-xl xl:text-2xl">
         Every Auralis cymbal is shaped to bring out a distinct voice — complex,
         musical, and responsive. We believe great sound comes from intention.
         From the alloy, the hammering, and the hands that shape it. Auralis
