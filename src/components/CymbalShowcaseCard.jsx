@@ -1,6 +1,12 @@
 import { useRef } from "react";
 
-export function CymbalShowcaseCard({ heading, children, videoSrc, videoRef }) {
+export function CymbalShowcaseCard({
+  heading,
+  children,
+  videoSrc,
+  videoRef,
+  useHEVC,
+}) {
   const internalVideoRef = useRef(null);
 
   return (
@@ -17,16 +23,24 @@ export function CymbalShowcaseCard({ heading, children, videoSrc, videoRef }) {
       </h3>
       <div className="relative aspect-video w-full -translate-y-1.5 scale-115 overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-125 lg:scale-125 lg:group-hover:scale-135">
         <video
+          key={
+            useHEVC === null
+              ? "placeholder" // first-pass, no source
+              : useHEVC
+                ? "mov" // HEVC-ready
+                : "webm" // fallback
+          }
           ref={(node) => {
             internalVideoRef.current = node;
             if (videoRef) videoRef.current = node;
           }}
-          src={videoSrc}
           className="absolute inset-0 h-full w-full object-cover"
           muted
           playsInline
           preload="metadata"
-        />
+        >
+          {videoSrc}
+        </video>
       </div>
 
       <p className="md:text-lg lg:text-xl xl:text-2xl">{children}</p>

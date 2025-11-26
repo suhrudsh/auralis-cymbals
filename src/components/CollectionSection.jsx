@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { CymbalScrollVideo } from "./CymbalScrollVideo";
 import { CymbalShowcaseCard } from "./CymbalShowcaseCard";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export function CollectionSection() {
   const isMobile = useIsMobile(1024);
+  const [useHEVC, setUseHEVC] = useState(null);
 
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
@@ -94,6 +95,16 @@ export function CollectionSection() {
     });
   }, [isMobile]);
 
+  //HEVC detection
+  useLayoutEffect(() => {
+    const vidEl = document.createElement("video");
+    const result = vidEl
+      .canPlayType('video/mp4; codecs="hvc1"')
+      .replace(/^no$/i, "");
+
+    setUseHEVC(!!result);
+  }, []);
+
   return (
     <section ref={sectionRef} className="flex flex-col gap-16 py-24">
       <div>
@@ -128,8 +139,16 @@ export function CollectionSection() {
         {isMobile && (
           <CymbalShowcaseCard
             heading={"Lumis"}
-            videoSrc={"lumis-cymbal-hover.webm"}
+            videoSrc={
+              useHEVC !== null &&
+              (useHEVC ? (
+                <source src="lumis-cymbal-hover.mov" type="video/quicktime" />
+              ) : (
+                <source src="lumis-cymbal-hover.webm" type="video/webm" />
+              ))
+            }
             videoRef={lumisVideoRef}
+            useHEVC={useHEVC}
           >
             Bright and open, with a fast,
             <br />
@@ -139,7 +158,15 @@ export function CollectionSection() {
 
         <CymbalShowcaseCard
           heading={"Vetra"}
-          videoSrc={"vetra-cymbal-hover.webm"}
+          videoSrc={
+            useHEVC !== null &&
+            (useHEVC ? (
+              <source src="vetra-cymbal-hover.mov" type="video/quicktime" />
+            ) : (
+              <source src="vetra-cymbal-hover.webm" type="video/webm" />
+            ))
+          }
+          useHEVC={useHEVC}
         >
           Dark, complex, and warm
           <br />
@@ -148,8 +175,16 @@ export function CollectionSection() {
         {!isMobile && (
           <CymbalShowcaseCard
             heading={"Lumis"}
-            videoSrc={"lumis-cymbal-hover.webm"}
+            videoSrc={
+              useHEVC !== null &&
+              (useHEVC ? (
+                <source src="lumis-cymbal-hover.mov" type="video/quicktime" />
+              ) : (
+                <source src="lumis-cymbal-hover.webm" type="video/webm" />
+              ))
+            }
             videoRef={lumisVideoRef}
+            useHEVC={useHEVC}
           >
             Bright and open, with a fast,
             <br />
@@ -158,7 +193,15 @@ export function CollectionSection() {
         )}
         <CymbalShowcaseCard
           heading={"Solan"}
-          videoSrc={"solan-cymbal-hover.webm"}
+          videoSrc={
+            useHEVC !== null &&
+            (useHEVC ? (
+              <source src="solan-cymbal-hover.mov" type="video/quicktime" />
+            ) : (
+              <source src="solan-cymbal-hover.webm" type="video/webm" />
+            ))
+          }
+          useHEVC={useHEVC}
         >
           Dry and defined, with a subtle
           <br />
