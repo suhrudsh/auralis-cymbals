@@ -9,7 +9,7 @@ import planeFragmentShader from "../shaders/planeFragmentShader.glsl";
 import { useFrame, useThree } from "@react-three/fiber";
 import { MeshStandardMaterial } from "three";
 
-export function HeroSectionScene(props) {
+export function HeroSectionScene({ props, visible }) {
   const { nodes, materials } = useGLTF(
     `${import.meta.env.BASE_URL}auralis-cymbals-hero-section.glb`,
   );
@@ -20,7 +20,7 @@ export function HeroSectionScene(props) {
     texture: trailTexture,
     updatePointer,
     clearPointer,
-  } = useTrailTexture({ size });
+  } = useTrailTexture({ size, visible });
 
   useEffect(() => {
     window.addEventListener("mousemove", updatePointer);
@@ -51,6 +51,7 @@ export function HeroSectionScene(props) {
   );
 
   useFrame(({ clock }) => {
+    if (!visible) return;
     planeUniforms.uTime.value = clock.elapsedTime;
   });
 

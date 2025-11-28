@@ -3,15 +3,28 @@ import { Canvas } from "@react-three/fiber";
 import { Lights } from "./Lights";
 import { HeroSectionScene } from "./HeroSectionScene";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SplitText } from "gsap/all";
 import gsap from "gsap";
+import { SRGBColorSpace } from "three";
 
 gsap.registerPlugin(SplitText);
 
 export function HeroSection() {
+  const [visible, setVisible] = useState(true);
+
+  const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const subheadingRef = useRef(null);
+
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.1 },
+    );
+    io.observe(sectionRef.current);
+    return () => io.disconnect();
+  }, []);
 
   useGSAP(() => {
     const split = new SplitText(headingRef.current, {
@@ -46,16 +59,23 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-[95svh]">
+    <section ref={sectionRef} className="relative h-[95svh]">
       <div className="absolute -z-10 h-full w-full">
         <Canvas
           camera={{
             position: [0, 15.5, 0],
           }}
+          shadows={false}
+          gl={{
+            antialias: false,
+            powerPreference: "high-performance",
+            outputColorSpace: SRGBColorSpace,
+          }}
+          dpr={[1, 1.5]}
         >
           <Lights />
           <Environment preset="forest" environmentIntensity={0.05} />
-          <HeroSectionScene />
+          <HeroSectionScene visible={visible} />
         </Canvas>
       </div>
       <div className="to-bg flex h-full w-full flex-col items-center justify-center gap-2 bg-linear-to-b from-transparent from-60% px-4 text-center lg:gap-8">

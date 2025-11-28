@@ -16,7 +16,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import trailFragmentShader from "../shaders/trailFragmentShader.glsl";
 import trailVertexShader from "../shaders/trailVertexShader.glsl";
 
-export function useTrailTexture({ size, fade = 0.01 }) {
+export function useTrailTexture({ size, fade = 0.01, visible = true }) {
   const { gl } = useThree();
   const scene = useMemo(() => new Scene(), []);
   const camera = useMemo(() => new OrthographicCamera(-1, 1, 1, -1, 0, 1), []);
@@ -61,6 +61,7 @@ export function useTrailTexture({ size, fade = 0.01 }) {
   const pointerRef = useRef(new Vector2(0.5, 0.5));
 
   useFrame(({ clock }) => {
+    if (!visible) return;
     trailMaterial.uniforms.uMouse.value.copy(pointerRef.current);
     trailMaterial.uniforms.uPreviousFrame.value = renderTargets.read.texture;
     trailMaterial.uniforms.uTime.value = clock.elapsedTime; // Approximate time increment
