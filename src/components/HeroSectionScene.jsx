@@ -1,13 +1,17 @@
 import { useGLTF, useTexture } from "@react-three/drei";
 import { useMemo, useEffect } from "react";
-import CustomShaderMaterial from "three-custom-shader-material";
 import { useTrailTexture } from "../hooks/useTrailTexture";
 import vertexShader from "../shaders/vertexShader.glsl";
 import fragmentShader from "../shaders/fragmentShader.glsl";
 import planeVertexShader from "../shaders/planeVertexShader.glsl";
 import planeFragmentShader from "../shaders/planeFragmentShader.glsl";
 import { useFrame, useThree } from "@react-three/fiber";
-import { MeshStandardMaterial } from "three";
+import {
+  LinearSRGBColorSpace,
+  MeshStandardMaterial,
+  SRGBColorSpace,
+} from "three";
+import CustomShaderMaterial from "three-custom-shader-material/vanilla";
 
 export function HeroSectionScene({ props, visible }) {
   const { nodes, materials } = useGLTF(
@@ -61,6 +65,20 @@ export function HeroSectionScene({ props, visible }) {
     normalMap: "auralis-cymbals-hero-section-plane-normal.webp",
   });
 
+  const planeMaterial = useMemo(
+    () =>
+      new CustomShaderMaterial({
+        baseMaterial: MeshStandardMaterial,
+        uniforms: planeUniforms,
+        vertexShader: planeVertexShader,
+        fragmentShader: planeFragmentShader,
+        transparent: false,
+        ...planeTextures,
+        metalness: 1,
+      }),
+    [planeUniforms, planeTextures],
+  );
+
   const cymbalTextures = useTexture({
     map: "cymbal-diffuse.webp",
   });
@@ -78,20 +96,49 @@ export function HeroSectionScene({ props, visible }) {
     obj.name.toLowerCase().startsWith("cymbal"),
   );
 
+  const cymbalMaterial = useMemo(
+    () =>
+      new CustomShaderMaterial({
+        baseMaterial: MeshStandardMaterial,
+        uniforms: shaderUniforms,
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        transparent: true,
+        color: materials.cymbals.color,
+        roughness: materials.cymbals.roughness,
+        metalness: materials.cymbals.metalness,
+        map: cymbalTextures.map,
+        normalMap: materials.cymbals.normalMap,
+        roughnessMap: materials.cymbals.roughnessMap,
+        normalScale: materials.cymbals.normalScale,
+      }),
+    [
+      cymbalTextures.map,
+      materials.cymbals.color,
+      materials.cymbals.roughness,
+      materials.cymbals.metalness,
+      materials.cymbals.normalMap,
+      materials.cymbals.roughnessMap,
+      materials.cymbals.normalScale,
+      shaderUniforms,
+    ],
+  );
+
+  planeTextures.map.colorSpace = SRGBColorSpace;
+  planeTextures.roughnessMap.colorSpace = LinearSRGBColorSpace;
+  planeTextures.normalMap.colorSpace = LinearSRGBColorSpace;
+
+  // CYMBAL TEXTURE
+  cymbalTextures.map.colorSpace = SRGBColorSpace;
+
+  // SHADOW BAKE
+  shadowMap.colorSpace = SRGBColorSpace;
+
   return (
     <>
       <group {...props} dispose={null}>
         {/* Plane with shadow bake and trail mask */}
-        <mesh geometry={nodes.Plane.geometry}>
-          <CustomShaderMaterial
-            baseMaterial={MeshStandardMaterial}
-            uniforms={planeUniforms}
-            vertexShader={planeVertexShader}
-            fragmentShader={planeFragmentShader}
-            {...planeTextures}
-            metalness={1}
-          />
-        </mesh>
+        <mesh geometry={nodes.Plane.geometry} material={planeMaterial} />
 
         {/* Other meshes with custom shader */}
         {cymbals.map((cymbal, i) => (
@@ -100,22 +147,8 @@ export function HeroSectionScene({ props, visible }) {
             geometry={cymbal.geometry}
             position={cymbal.position}
             rotation={cymbal.rotation}
-          >
-            <CustomShaderMaterial
-              baseMaterial={MeshStandardMaterial}
-              uniforms={shaderUniforms}
-              vertexShader={vertexShader}
-              fragmentShader={fragmentShader}
-              transparent={true}
-              color={materials.cymbals.color}
-              roughness={materials.cymbals.roughness}
-              metalness={materials.cymbals.metalness}
-              map={cymbalTextures.map}
-              normalMap={materials.cymbals.normalMap}
-              roughnessMap={materials.cymbals.roughnessMap}
-              normalScale={materials.cymbals.normalScale}
-            />
-          </mesh>
+            material={cymbalMaterial}
+          />
         ))}
       </group>
     </>
