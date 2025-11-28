@@ -28,9 +28,18 @@ export function useTrailTexture({ size, fade = 0.01, visible = true }) {
 
   const renderTargets = useMemo(() => {
     const options = { type: HalfFloatType };
+    const scale = 0.25;
     return {
-      read: new WebGLRenderTarget(resolution.x, resolution.y, options),
-      write: new WebGLRenderTarget(resolution.x, resolution.y, options),
+      read: new WebGLRenderTarget(
+        resolution.x * scale,
+        resolution.y * scale,
+        options,
+      ),
+      write: new WebGLRenderTarget(
+        resolution.x * scale,
+        resolution.y * scale,
+        options,
+      ),
     };
   }, [resolution]);
 
