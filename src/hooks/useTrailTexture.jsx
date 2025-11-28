@@ -17,6 +17,7 @@ import trailFragmentShader from "../shaders/trailFragmentShader.glsl";
 import trailVertexShader from "../shaders/trailVertexShader.glsl";
 
 export function useTrailTexture({ size, fade = 0.01, visible = true }) {
+  let dirty = false;
   const { gl } = useThree();
   const scene = useMemo(() => new Scene(), []);
   const camera = useMemo(() => new OrthographicCamera(-1, 1, 1, -1, 0, 1), []);
@@ -71,6 +72,8 @@ export function useTrailTexture({ size, fade = 0.01, visible = true }) {
 
   useFrame(({ clock }) => {
     if (!visible) return;
+    if (!dirty) return;
+
     trailMaterial.uniforms.uMouse.value.copy(pointerRef.current);
     trailMaterial.uniforms.uPreviousFrame.value = renderTargets.read.texture;
     trailMaterial.uniforms.uTime.value = clock.elapsedTime; // Approximate time increment
@@ -82,11 +85,15 @@ export function useTrailTexture({ size, fade = 0.01, visible = true }) {
     let temp = renderTargets.read;
     renderTargets.read = renderTargets.write;
     renderTargets.write = temp;
+
+    dirty = false;
   });
 
   return {
     texture: renderTargets.read.texture,
     updatePointer: (e) => {
+      dirty = true;
+
       if (e.touches && e.touches[0]) {
         pointerRef.current = {
           x: e.touches[0].clientX / size.width,
