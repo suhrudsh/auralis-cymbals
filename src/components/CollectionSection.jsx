@@ -93,6 +93,8 @@ export function CollectionSection() {
         });
       },
     });
+
+    setTimeout(() => ScrollTrigger.refresh(), 50);
   }, [isMobile]);
 
   //HEVC detection
@@ -123,12 +125,20 @@ export function CollectionSection() {
             for a different kind of player
           </p>
         </div>
-        <img
-          ref={staticImageRef}
-          className="fixed top-0 z-10 h-screen w-full overflow-visible object-cover"
-          src="lumis-cymbal-thumbnail.webp"
-          alt=""
-        />
+        {isMobile && (
+          <div
+            ref={staticImageRef}
+            className="fixed top-0 left-1/2 z-10 aspect-video h-screen -translate-x-1/2 overflow-visible bg-[url('/lumis-cymbal-thumbnail.webp')] bg-cover bg-center"
+          />
+        )}
+        {!isMobile && (
+          <img
+            ref={staticImageRef}
+            className="fixed top-0 z-10 h-screen w-full overflow-visible object-cover"
+            src="lumis-cymbal-thumbnail.webp"
+            alt=""
+          />
+        )}
         <CymbalScrollVideo staticImageRef={staticImageRef} />
       </div>
       <div
