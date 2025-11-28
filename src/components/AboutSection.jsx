@@ -66,12 +66,12 @@ export function AboutSection() {
     >
       <div
         ref={imageRef}
-        className="absolute bottom-0 left-0 h-full w-full bg-[url('/images/cymbal-finger.webp')] bg-contain bg-bottom bg-no-repeat mix-blend-lighten lg:bg-right"
+        className="absolute bottom-0 left-0 h-full w-full bg-[url('/images/cymbal-finger.webp')] bg-contain bg-bottom bg-no-repeat mix-blend-lighten will-change-transform lg:bg-right"
       />
 
       <h2
         ref={headingRef}
-        className="font-heading col-span-7 text-center text-4xl font-bold md:text-5xl lg:text-left lg:text-7xl xl:text-8xl"
+        className="font-heading col-span-7 text-center text-4xl font-bold will-change-transform md:text-5xl lg:text-left lg:text-7xl xl:text-8xl"
       >
         Built for
         <br />

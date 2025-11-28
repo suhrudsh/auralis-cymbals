@@ -111,7 +111,7 @@ export function CollectionSection() {
         <div className="sticky top-24 flex flex-col gap-2 lg:gap-8">
           <h2
             ref={headingRef}
-            className="font-heading text-center text-4xl font-bold md:text-5xl lg:text-7xl xl:text-8xl"
+            className="font-heading text-center text-4xl font-bold will-change-transform md:text-5xl lg:text-7xl xl:text-8xl"
           >
             The Auralis
             <br />

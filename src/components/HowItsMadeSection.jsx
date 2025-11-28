@@ -97,7 +97,7 @@ export function HowItsMadeSection() {
     <section id="how-its-made" ref={sectionRef} className="px-4 py-24 md:px-12">
       <h2
         ref={headingRef}
-        className="font-heading mb-16 text-center text-4xl font-bold md:text-5xl lg:text-7xl xl:text-8xl"
+        className="font-heading mb-16 text-center text-4xl font-bold will-change-transform md:text-5xl lg:text-7xl xl:text-8xl"
       >
         Made by hand. <br /> Made to last.
       </h2>
@@ -107,7 +107,7 @@ export function HowItsMadeSection() {
           ref={(el) => el && imgRefs.current.push(el)}
           src="images/bronze-sheet.webp"
           alt=""
-          className="col-span-5 col-start-1 row-span-5 row-start-1 lg:col-span-10 lg:col-start-3"
+          className="col-span-5 col-start-1 row-span-5 row-start-1 will-change-transform lg:col-span-10 lg:col-start-3"
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
@@ -121,7 +121,7 @@ export function HowItsMadeSection() {
           ref={(el) => el && imgRefs.current.push(el)}
           src="images/bronze-sheet-hammer.webp"
           alt=""
-          className="col-span-5 col-start-4 row-span-5 row-start-6 lg:col-span-10 lg:col-start-13"
+          className="col-span-5 col-start-4 row-span-5 row-start-6 will-change-transform lg:col-span-10 lg:col-start-13"
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
@@ -135,7 +135,7 @@ export function HowItsMadeSection() {
           ref={(el) => el && imgRefs.current.push(el)}
           src="images/cymbals-on-stands.webp"
           alt=""
-          className="col-span-5 col-start-1 row-span-5 row-start-11 lg:col-span-10 lg:col-start-3"
+          className="col-span-5 col-start-1 row-span-5 row-start-11 will-change-transform lg:col-span-10 lg:col-start-3"
         />
         <p
           ref={(el) => el && textRefs.current.push(el)}
