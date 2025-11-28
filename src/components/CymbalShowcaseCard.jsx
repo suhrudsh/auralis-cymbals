@@ -24,7 +24,7 @@ export function CymbalShowcaseCard({
       }}
       className="bg-accent group overflow-hidden py-12 text-center lg:py-27"
     >
-      <h3 className="font-heading font-bold md:text-6xl lg:text-7xl xl:text-8xl">
+      <h3 className="font-heading text-5xl font-bold md:text-6xl lg:text-7xl xl:text-8xl">
         {heading}
       </h3>
       <div className="relative aspect-video w-full -translate-y-1.5 scale-115 overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-125 lg:scale-125 lg:group-hover:scale-135">
