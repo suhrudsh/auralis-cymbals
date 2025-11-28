@@ -56,7 +56,7 @@ export function CollectionSection() {
 
     ScrollTrigger.create({
       trigger: animationContainerRef.current,
-      start: isMobile ? "top 90%" : "top bottom",
+      start: isMobile ? "top 80%" : "top bottom",
       end: isMobile ? "top 20%" : "bottom bottom",
       scrub: true,
       invalidateOnRefresh: true,
