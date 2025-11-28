@@ -60,7 +60,7 @@ export function CymbalScrollVideo({ staticImageRef }) {
           (totalFrames - 1),
       );
       const img = imagesRef.current[currentFrame] || imagesRef.current[0];
-      if (img.complete) ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      if (img.complete) drawImageCover(ctx, img, canvas);
     };
     setCanvasSize();
     window.addEventListener("resize", setCanvasSize);
@@ -69,7 +69,7 @@ export function CymbalScrollVideo({ staticImageRef }) {
       trigger: canvas,
       start: "top top",
       end: `+=${scrollLength}`,
-      scrub: 1,
+      scrub: true,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         const frameIndex = Math.floor(self.progress * (totalFrames - 1));
@@ -98,10 +98,7 @@ export function CymbalScrollVideo({ staticImageRef }) {
 
   return (
     <div style={{ height: window.innerHeight + scrollLength }} className="z-10">
-      <canvas
-        ref={canvasRef}
-        className="sticky top-0 block h-screen w-full object-cover"
-      />
+      <canvas ref={canvasRef} className="sticky top-0 block h-lvh w-full" />
     </div>
   );
 }
