@@ -83,9 +83,6 @@ export function CollectionSection() {
         const imageWidth =
           staticImageMeasureRef.current.getBoundingClientRect().width;
         targetScale = videoWidth / imageWidth;
-        console.log("videoWidth:", videoWidth);
-        console.log("imageWidth:", imageWidth);
-        console.log("targetScale:", targetScale);
       },
       onUpdate: (self) => {
         const p = self.progress;
@@ -95,10 +92,6 @@ export function CollectionSection() {
 
         const scale = gsap.utils.interpolate(1, targetScale, easedProgress);
         const lumisVideoPosition = getPos(lumisVideoRef.current);
-        // const targetScale =
-        //   lumisVideoRef.current.getBoundingClientRect().width /
-        //   staticImageRef.current.offsetWidth;
-        // const scale = 1 - (1 - targetScale) * easedProgress;
 
         gsap.set(staticImageRef.current, {
           x: lumisVideoPosition.x * easedProgress,
@@ -141,7 +134,7 @@ export function CollectionSection() {
         </div>
         <div
           ref={staticImageMeasureRef}
-          className="pointer-events-none invisible fixed aspect-video h-lvh overflow-hidden lg:h-auto lg:w-full"
+          className="pointer-events-none invisible fixed aspect-video h-lvh overflow-hidden lg:h-screen lg:w-full"
         >
           <img src="lumis-cymbal-thumbnail.webp" />
         </div>
@@ -155,7 +148,7 @@ export function CollectionSection() {
         {!isMobile && (
           <img
             ref={staticImageRef}
-            className="fixed top-1/2 z-10 w-full -translate-y-1/2 overflow-visible object-cover"
+            className="fixed top-1/2 z-10 h-screen w-full -translate-y-1/2 overflow-visible object-cover"
             src="lumis-cymbal-thumbnail.webp"
             alt=""
           />
