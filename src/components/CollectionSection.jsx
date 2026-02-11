@@ -15,13 +15,14 @@ export function CollectionSection() {
 
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
+  const staticImageMeasureRef = useRef(null);
   const staticImageRef = useRef(null);
   const animationContainerRef = useRef(null);
   const lumisVideoRef = useRef(null);
 
   useGSAP(() => {
     if (!animationContainerRef.current) return;
-    staticImageRef.current.style.display = "none";
+    gsap.set(staticImageRef.current, { autoAlpha: 0 });
 
     const split = new SplitText(headingRef.current, {
       type: "words",
@@ -54,6 +55,8 @@ export function CollectionSection() {
       };
     };
 
+    let targetScale;
+
     ScrollTrigger.create({
       trigger: animationContainerRef.current,
       start: isMobile ? "top 80%" : "top bottom",
@@ -64,15 +67,25 @@ export function CollectionSection() {
         lumisVideoRef.current.style.opacity = 0;
       },
       onLeave: () => {
-        staticImageRef.current.style.display = "none";
+        gsap.set(staticImageRef.current, { autoAlpha: 0 });
         lumisVideoRef.current.style.opacity = 1;
       },
       onEnterBack: () => {
-        staticImageRef.current.style.display = "block";
+        gsap.set(staticImageRef.current, { autoAlpha: 1 });
+
         lumisVideoRef.current.style.opacity = 0;
       },
       onLeaveBack: () => {
         lumisVideoRef.current.style.opacity = 1;
+      },
+      onRefresh: () => {
+        const videoWidth = lumisVideoRef.current.getBoundingClientRect().width;
+        const imageWidth =
+          staticImageMeasureRef.current.getBoundingClientRect().width;
+        targetScale = videoWidth / imageWidth;
+        console.log("videoWidth:", videoWidth);
+        console.log("imageWidth:", imageWidth);
+        console.log("targetScale:", targetScale);
       },
       onUpdate: (self) => {
         const p = self.progress;
@@ -80,11 +93,12 @@ export function CollectionSection() {
 
         const easedProgress = ease(p);
 
+        const scale = gsap.utils.interpolate(1, targetScale, easedProgress);
         const lumisVideoPosition = getPos(lumisVideoRef.current);
-        const targetScale =
-          (lumisVideoRef.current.offsetWidth / 1920) * (isMobile ? 1.15 : 1.25);
-
-        const scale = 1 - (1 - targetScale) * easedProgress;
+        // const targetScale =
+        //   lumisVideoRef.current.getBoundingClientRect().width /
+        //   staticImageRef.current.offsetWidth;
+        // const scale = 1 - (1 - targetScale) * easedProgress;
 
         gsap.set(staticImageRef.current, {
           x: lumisVideoPosition.x * easedProgress,
@@ -125,6 +139,13 @@ export function CollectionSection() {
             for a different kind of player
           </p>
         </div>
+        <div
+          ref={staticImageMeasureRef}
+          className="pointer-events-none invisible fixed aspect-video h-lvh overflow-hidden lg:h-auto lg:w-full"
+        >
+          <img src="lumis-cymbal-thumbnail.webp" />
+        </div>
+
         {isMobile && (
           <div
             ref={staticImageRef}
@@ -134,7 +155,7 @@ export function CollectionSection() {
         {!isMobile && (
           <img
             ref={staticImageRef}
-            className="fixed top-0 z-10 h-screen w-full overflow-visible object-cover"
+            className="fixed top-1/2 z-10 w-full -translate-y-1/2 overflow-visible object-cover"
             src="lumis-cymbal-thumbnail.webp"
             alt=""
           />
